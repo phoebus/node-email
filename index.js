@@ -106,7 +106,7 @@ Email.prototype = {
     if (bcc) msg.line('BCC: ' + bcc)
 
     msg.line('Mime-Version: 1.0')
-    msg.line('Content-Type: multipart/alternative; boundary=' + boundry)
+    msg.line('Content-Type: multipart/alternative; boundary="' + boundry + '"')
     msg.line()
 
     if (plaintext) {
@@ -116,6 +116,7 @@ Email.prototype = {
       msg.line()
       msg.line(plaintext)
       msg.line()
+      msg.line('--' + boundry + '--')
     }
 
     if (html) {
@@ -126,6 +127,7 @@ Email.prototype = {
       msg.line()
       msg.line(this.encodedBody)
       msg.line()
+      msg.line('--' + boundry + '--')
     }
 
     return msg.toString()
