@@ -99,7 +99,7 @@ Email.prototype = {
     msg.line('To: ' + to)
     msg.line('From: '+ (this.from || exports.from))
     msg.line('Reply-To: ' + (this.replyTo || this.from || exports.from))
-    msg.line('Subject: '+ this.subject)
+    msg.line('Subject: '+ '=?UTF-8?B?'+ (new Buffer(this.subject)).toString('base64')   + '?=')
 
     if (cc) msg.line('CC: ' + cc)
 
